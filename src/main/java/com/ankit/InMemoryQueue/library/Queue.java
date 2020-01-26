@@ -1,7 +1,7 @@
 package com.ankit.InMemoryQueue.library;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Queue implements Observable {
     String name;
@@ -10,8 +10,8 @@ public class Queue implements Observable {
 
     Queue(String name) {
         this.name = name;
-        consumers = new ArrayList<>();
-        messages = new ArrayList<>();
+        consumers = new Vector<>();//Used Vector instead of ArrayList as Vector is Thread Safe
+        messages = new Vector<>();//Used Vector instead of ArrayList as Vector is Thread Safe
     }
 
     public void addObserver(Observer observer) {
@@ -19,6 +19,7 @@ public class Queue implements Observable {
     }
 
     public void notifyObservers(Object message) {
+        //TODO: Check if parallelStream is thread safe. If it iterates over the consumers and parallely somebody calls add on the consumers or if there is a remove function on consumer
         consumers.parallelStream().forEach(consumer -> consumer.update(message));
     }
 

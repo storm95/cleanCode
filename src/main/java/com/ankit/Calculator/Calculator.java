@@ -1,7 +1,7 @@
 package com.ankit.Calculator;
 
 public class Calculator {
-    String name;
+    private String name;
     Calculator(String name){
         this.name=name;
     }

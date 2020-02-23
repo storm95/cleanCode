@@ -35,7 +35,6 @@ public class TaskPoller {
                 TaskInstance taskInstance = queue.peek();
                 if (taskInstance != null) {
                     if (taskInstance.scheduledMs <= System.currentTimeMillis()) {
-                        taskInstance.preSubmit();
                         executorService.submit(taskInstance);
                         queue.poll();
                     }

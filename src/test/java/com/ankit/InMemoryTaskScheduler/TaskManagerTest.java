@@ -15,7 +15,7 @@ public class TaskManagerTest {
 
     @BeforeClass
     public static void init() {
-        taskManager.init(1);
+        taskManager.init(3);
     }
 
     @AfterClass
@@ -44,12 +44,24 @@ public class TaskManagerTest {
             System.out.println("Delayed Task2 is Running");
         };
         assertTrue(taskManager.submitDelayedTask(runnable2, 1000));
+    }
 
+    @Test
+    public void testSubmitScheduledTask() {
 
-        Runnable runnable3 = () -> {
+        Runnable runnable1 = () -> {
             System.out.println("Scheduled Task1 is Running");
         };
-        assertTrue(taskManager.submitScheduledTask(runnable3, 1500));
+        assertTrue(taskManager.submitScheduledTask(runnable1, 1000));
 
+        Runnable runnable2 = () -> {
+            System.out.println("Scheduled Task2 is Running");
+        };
+        assertTrue(taskManager.submitScheduledTask(runnable2, 2000));
+
+        Runnable runnable3 = () -> {
+            System.out.println("Scheduled Task3 is Running");
+        };
+        assertTrue(taskManager.submitScheduledTask(runnable3, 3000));
     }
 }

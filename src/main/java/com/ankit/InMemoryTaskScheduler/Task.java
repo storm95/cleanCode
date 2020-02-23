@@ -14,7 +14,7 @@ public abstract class Task {
         this.runnable = runnable;
     }
 
-    abstract void preInstanceSubmit();
+    abstract void postInstanceSubmit();
 
     void run() {
         runnable.run();

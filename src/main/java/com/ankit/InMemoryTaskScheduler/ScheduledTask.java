@@ -8,16 +8,11 @@ public class ScheduledTask extends Task {
         this.intervalMs = intervalMs;
     }
 
-    void preInstanceSubmit(){
+    void postInstanceSubmit(){
         schedule();
     }
 
     boolean schedule() {
-        if(taskInstances.size() == 0) {
-            long scheduleMs = ((System.currentTimeMillis() + intervalMs - 1 ) / intervalMs)* intervalMs;
-            return super.schedule(scheduleMs);
-        }
-
-        return super.schedule(taskInstances.get(taskInstances.size()-1).scheduledMs+intervalMs);
+        return super.schedule(System.currentTimeMillis()+intervalMs);
     }
 }

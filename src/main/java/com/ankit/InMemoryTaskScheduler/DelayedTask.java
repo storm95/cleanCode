@@ -8,7 +8,7 @@ class DelayedTask extends Task {
         this.delayMs = delayMs;
     }
 
-    void preInstanceSubmit(){}
+    void postInstanceSubmit(){}
 
     boolean schedule() {
         return super.schedule(System.currentTimeMillis() + delayMs);

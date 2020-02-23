@@ -21,10 +21,6 @@ public class TaskInstance implements Runnable, Comparable<TaskInstance> {
         return Long.compare(this.scheduledMs, taskInstance.scheduledMs);
     }
 
-    void preSubmit() {
-        task.preInstanceSubmit();
-    }
-
     private void preRun() {
         startTime = System.currentTimeMillis();
         System.out.println("Task is starting at "+startTime);
@@ -35,6 +31,7 @@ public class TaskInstance implements Runnable, Comparable<TaskInstance> {
         endTime = System.currentTimeMillis();
         System.out.println("Task is completed at "+endTime+"\n----------------------------------\n");
         setStatus(TaskInstanceStatus.Status.Complete);
+        task.postInstanceSubmit();
     }
 
     void setStatus(TaskInstanceStatus.Status status) {

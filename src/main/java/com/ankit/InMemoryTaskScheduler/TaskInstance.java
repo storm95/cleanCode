@@ -1,6 +1,6 @@
 package com.ankit.InMemoryTaskScheduler;
 
-public class TaskInstance implements Runnable, Comparable<TaskInstance> {
+class TaskInstance implements Runnable, Comparable<TaskInstance> {
     public Task task;
     public long scheduledMs, startTime, endTime;
     public TaskInstanceStatus taskStatus;

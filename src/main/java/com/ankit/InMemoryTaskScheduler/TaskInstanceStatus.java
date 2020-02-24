@@ -1,6 +1,6 @@
 package com.ankit.InMemoryTaskScheduler;
 
-public class TaskInstanceStatus {
+class TaskInstanceStatus {
     public Status status;
 
     TaskInstanceStatus() {

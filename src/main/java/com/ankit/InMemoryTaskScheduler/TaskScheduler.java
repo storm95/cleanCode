@@ -2,7 +2,7 @@ package com.ankit.InMemoryTaskScheduler;
 
 import java.util.concurrent.PriorityBlockingQueue;
 
-public class TaskScheduler {
+class TaskScheduler {
     private static TaskScheduler ourInstance = new TaskScheduler();
     private PriorityBlockingQueue<TaskInstance> queue;
 

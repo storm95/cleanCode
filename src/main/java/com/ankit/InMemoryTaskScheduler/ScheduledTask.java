@@ -1,6 +1,6 @@
 package com.ankit.InMemoryTaskScheduler;
 
-public class ScheduledTask extends Task {
+class ScheduledTask extends Task {
     long intervalMs;
 
     ScheduledTask(Runnable runnable, long intervalMs) {

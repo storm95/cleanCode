@@ -3,7 +3,7 @@ package com.ankit.InMemoryTaskScheduler;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Task {
+abstract class Task {
     List<TaskInstance> taskInstances;
     Runnable runnable;
     private final TaskScheduler taskScheduler;

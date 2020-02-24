@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(JUnit4.class)
 public class TaskManagerTest {
 
-    private static TaskManager taskManager = TaskManager.getInstance();
+    private static TaskManagerInterface taskManager = TaskManager.getInstance();
 
     @BeforeClass
     public static void init() {

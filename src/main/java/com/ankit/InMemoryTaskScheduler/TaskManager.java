@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.PriorityBlockingQueue;
 
-public class TaskManager {
+public class TaskManager implements TaskManagerInterface {
     private static TaskManager taskManager = new TaskManager();
     private final List<Task> taskList;
     private final TaskScheduler taskScheduler;
@@ -27,6 +27,10 @@ public class TaskManager {
         taskPoller.init(noOfThreads, queue);
     }
 
+    public void shutdown() {
+        taskPoller.shutdown();
+    }
+
     public boolean submitDelayedTask(Runnable runnable, long delayMs) {
         DelayedTask delayedTask = new DelayedTask(runnable, delayMs);
         return delayedTask.schedule();
@@ -35,9 +39,5 @@ public class TaskManager {
     public boolean submitScheduledTask(Runnable runnable, long intervalMs) {
         ScheduledTask scheduledTask = new ScheduledTask(runnable, intervalMs);
         return scheduledTask.schedule();
-    }
-
-    public void shutdown() {
-        taskPoller.shutdown();
     }
 }

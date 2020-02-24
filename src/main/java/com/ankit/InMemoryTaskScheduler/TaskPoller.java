@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.PriorityBlockingQueue;
 
-public class TaskPoller {
+class TaskPoller {
     private static TaskPoller ourInstance = new TaskPoller();
     private final Thread pollingThread;
     private PriorityBlockingQueue<TaskInstance> queue;

@@ -15,6 +15,6 @@ public class RandomGenerator {
     }
 
     long nextRandom() {
-        return random.nextInt(3000);
+        return random.nextInt(1000);
     }
 }

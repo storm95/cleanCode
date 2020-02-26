@@ -5,10 +5,15 @@ public class App {
 
     public static void init() {
         queueManager = QueueProvider.getInstance();
+        queueManager.init();
     }
 
-    public static Queue registerQueue(String name) {
-        Queue queue = new Queue(name);
+    public static void shutdown() {
+        queueManager.shutdown();
+    }
+
+    public static Queue registerQueue(String name, Integer maxNoOfMessagesBeforeTtl) {
+        Queue queue = new Queue(name, maxNoOfMessagesBeforeTtl);
         queueManager.addQueue(name, queue);
 
         return queue;

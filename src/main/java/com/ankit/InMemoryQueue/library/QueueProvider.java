@@ -18,19 +18,16 @@ public class QueueProvider {
         queueMap = new HashMap<>();
         queues = new ArrayList<>();
         expiredMessageRemover = new Thread(getProcessRemovingExpiredMessages());
+        expiredMessageRemover.setDaemon(true);
     }
 
     public void init() {
         expiredMessageRemover.start();
     }
 
-    public void shutdown() {
-        expiredMessageRemover.interrupt();
-    }
-
     private Runnable getProcessRemovingExpiredMessages() {
         return () -> {
-          while(!Thread.interrupted()) {
+          while(true) {
             queues.parallelStream().forEach((queue) -> {
                 while (true) {
                     Message leastTtlMessage = queue.messagesExpiryPriority.peek();

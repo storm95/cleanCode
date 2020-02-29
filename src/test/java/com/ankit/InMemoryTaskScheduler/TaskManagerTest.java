@@ -21,7 +21,7 @@ public class TaskManagerTest {
     @AfterClass
     public static void shutdown() {
         try {
-            Thread.sleep(1000*60);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             System.out.println("Thread Interupted");
         } finally {

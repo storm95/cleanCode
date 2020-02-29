@@ -21,17 +21,17 @@ class TaskPoller {
     void init(int noOfThreads, PriorityBlockingQueue<TaskInstance> queue) {
         executorService = Executors.newFixedThreadPool(noOfThreads);//TODO: Implement if number of threads are not specified
         this.queue = queue;
-        pollingThread.setDaemon(true);
         pollingThread.start();
     }
 
     void shutdown() {
+        pollingThread.interrupt();
         executorService.shutdown();
     }
 
     private Runnable getStartPollingRunnable() {
         return () -> {
-            while(true) {
+            while(!pollingThread.isInterrupted()) {
                 TaskInstance taskInstance = queue.peek();
                 if (taskInstance != null) {
                     if (taskInstance.scheduledMs <= System.currentTimeMillis()) {

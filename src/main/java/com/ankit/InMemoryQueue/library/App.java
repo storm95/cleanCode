@@ -8,6 +8,10 @@ public class App {
         queueManager.init();
     }
 
+    public static void shutdown() {
+        queueManager.shutdown();
+    }
+
     public static Queue registerQueue(String name, Integer maxNoOfMessagesBeforeTtl) {
         Queue queue = new Queue(name, maxNoOfMessagesBeforeTtl);
         queueManager.addQueue(name, queue);

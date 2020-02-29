@@ -4,7 +4,6 @@ import com.ankit.InMemoryQueue.library.*;
 
 public class Client {
     public static void main(String args[]) {
-
         App.init();
         App.registerQueue("queue1", 5000);
         Consumer consumer1 = App.registerConsumer("consumer1", "queue1");
@@ -34,10 +33,7 @@ public class Client {
 
         System.out.println(QueueProvider.getInstance().getQueue("queue1").getSize());
 
-        try {
-            Thread.sleep(1000*60);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        App.shutdown();
     }
 }

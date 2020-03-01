@@ -1,0 +1,39 @@
+ConfigManager
+
+1) Create Bucket(BucketName) throws BucketAreadyExistsException
+2) Add Config to Bucket(BucketName, ConfigName, ConfigXML) throws BucketDoesnotExistException/ConfigNameAlreadyExistException
+3) Update Config(ConfigName, ConfigXML) throws ConfigNameDoesnotExistException
+4) Add Subscriber(Machine, BucketName) throws BucketNameDoesnotExistException
+
+1. HashMap of BucketName, Bucket
+2. HashMap of ConfigName, BucketName
+
+
+
+
+Bucket
+
+1) AddConfig(ConfigName, ConfigXML) throws ConfigNameAlreadyExistException
+2) UpdateConfig(ConfigName, ConfigXML) throws ConfigNameDoesnotExistException
+3) UpdateMachines()
+3) Add Subscriber(Machine) throws MachineAlreadySubscribed
+
+1. Name
+2. HashMap of ConfigName, Config
+3. List of Subscriber Machines
+
+
+
+Config
+
+1) Update(ConfigXML)
+
+
+1. Name
+2. ConfigXML
+
+
+
+Machine
+
+1) Update(Config[])

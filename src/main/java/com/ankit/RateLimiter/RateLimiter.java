@@ -2,12 +2,14 @@ package com.ankit.RateLimiter;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class RateLimiter {
     private static RateLimiter ourInstance = new RateLimiter();
-    private Map<String, Integer> noOfCalls;
+    private Map<String, AtomicInteger> noOfCalls;
     private int throttleLimit;
     private Thread keyRemoverThread;
+    private AtomicInteger val;
 
     public static RateLimiter getInstance() {
         return ourInstance;
@@ -51,6 +53,11 @@ public class RateLimiter {
              return 0;
         }
 
+        return noOfCalls.get(rateLimiterKey).addAndGet(1);
         return noOfCalls.get(rateLimiterKey);
     }
 }
+
+
+//Use AtomicInteger to keep synchronisation
+// Add try catch in runnable.run()

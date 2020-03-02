@@ -11,6 +11,7 @@ class TaskInstanceStatus {
         Created,
         Queued,
         Running,
-        Complete
+        Complete,
+        Failed
     }
 }

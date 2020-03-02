@@ -13,7 +13,13 @@ class TaskInstance implements Runnable, Comparable<TaskInstance> {
 
     public void run() {
         preRun();
-        task.run();
+        try {
+            task.run();
+            setStatus(TaskInstanceStatus.Status.Complete);
+        } catch (Exception e) {
+            System.out.println("Exception occured during Task Execution: " + e);
+            setStatus(TaskInstanceStatus.Status.Failed);
+        }
         postRun();
     }
 
@@ -30,7 +36,6 @@ class TaskInstance implements Runnable, Comparable<TaskInstance> {
     private void postRun() {
         endTime = System.currentTimeMillis();
         System.out.println("Task is completed at "+endTime+"\n----------------------------------\n");
-        setStatus(TaskInstanceStatus.Status.Complete);
         task.postInstanceSubmit();
     }
 

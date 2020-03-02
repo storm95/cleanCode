@@ -2,7 +2,7 @@ package com.ankit.RateLimiter;
 
 import java.util.Objects;
 
-public class RateLimiterKey extends Object {
+public class RateLimiterKey {
     String ip;
     Long second;
 
@@ -12,15 +12,17 @@ public class RateLimiterKey extends Object {
     }
 
     @Override
-    public String toString() {
-        Objects.hash(ip, second);
-        return ip+"_"+second;
+    public int hashCode() {
+        return Objects.hash(ip, second);
     }
 
-    static RateLimiterKey fromString(String rateLimiterKeyString) {
-        return new RateLimiterKey(rateLimiterKeyString.split("_")[0], Long.valueOf(rateLimiterKeyString.split("_")[1]));
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj == this) return true;
+        if (obj.getClass() != this.getClass()) return false;
+
+        RateLimiterKey rateLimiterKey = (RateLimiterKey) obj;
+        return rateLimiterKey.ip.equals(this.ip) && rateLimiterKey.second.equals(this.second);
     }
 }
-
-
-//Overrite hashCode and equals so that u can use it in map

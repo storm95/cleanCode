@@ -19,14 +19,24 @@ public class RateLimiterTest {
     public void testRateLimiterCall() {
 
         for(int i=0;i<20;++i) {
-            String msg = "Runnable Running, i = "+Integer.toString(i);
-            Runnable runnable = () -> System.out.println(msg);
+
+            Thread thread = new Thread(
+                    getRunnable(i)
+            );
+            thread.start();
+        }
+    }
+
+    private Runnable getRunnable(int i) {
+        return () -> {
+            String msg = "Executable Running, i = "+Integer.toString(i);
+            Executable executable = () -> System.out.println(msg);
 
             try {
-                rateLimiter.rateLimiterCall("ip1", runnable);
+                rateLimiter.rateLimiterCall("ip1", executable);
             } catch (Exception e) {
                 System.out.println(e);
             }
-        }
+        };
     }
 }

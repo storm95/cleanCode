@@ -6,10 +6,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class RateLimiter {
     private static RateLimiter ourInstance = new RateLimiter();
-    private Map<String, AtomicInteger> noOfCalls;
+    private Map<RateLimiterKey, Integer> noOfCalls;
     private int throttleLimit;
     private Thread keyRemoverThread;
-    private AtomicInteger val;
 
     public static RateLimiter getInstance() {
         return ourInstance;
@@ -30,34 +29,38 @@ public class RateLimiter {
     private Runnable getKeyRemoverRunnable() {
         return () -> {
           while(true) {
-              noOfCalls.keySet().removeIf(key -> RateLimiterKey.fromString(key).second < System.currentTimeMillis()/1000);
+              noOfCalls.keySet().removeIf(key -> key.second < System.currentTimeMillis()/1000);
           }
         };
     }
 
-    public void rateLimiterCall(String ip, Runnable runnable) throws Exception {
+    public void rateLimiterCall(String ip, Executable executable) throws Exception {
         RateLimiterKey rateLimiterKey = new RateLimiterKey(ip, System.currentTimeMillis()/1000);
-        Integer calls = getNoOfCalls(rateLimiterKey.toString());
+        Integer calls = incrementAndGetNoOfCalls(rateLimiterKey);
         System.out.println("Calls: "+calls+", ip: "+rateLimiterKey.ip+", second: "+rateLimiterKey.second);
         if (calls > throttleLimit) {
             throw new RateLimiterException();
         }
 
-        noOfCalls.put(rateLimiterKey.toString(), calls+1);
-        System.out.println("Current Time: "+System.currentTimeMillis());
-        runnable.run();
+        try {
+            executable.run();
+        } catch (Exception e) {
+            System.out.println("Exception occured while running your Executable: "+e);
+        }
     }
 
-    private int getNoOfCalls(String rateLimiterKey) {
-        if (!noOfCalls.containsKey(rateLimiterKey)) {
-             return 0;
-        }
+    private int incrementAndGetNoOfCalls(RateLimiterKey rateLimiterKey) {
+        Integer calls = 0;
+        synchronized (noOfCalls) {//TODO: Ask Vinit how to make this better so that we dont have performance implecations due to holding lock on whole of noOfCalls
+            if (noOfCalls.containsKey(rateLimiterKey)) {
+                calls = noOfCalls.get(rateLimiterKey);
+            }
 
-        return noOfCalls.get(rateLimiterKey).addAndGet(1);
-        return noOfCalls.get(rateLimiterKey);
+            noOfCalls.put(rateLimiterKey, calls + 1);
+            return calls + 1;
+        }
     }
 }
 
 
 //Use AtomicInteger to keep synchronisation
-// Add try catch in runnable.run()

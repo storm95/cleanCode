@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class RateLimiter {
     private static RateLimiter ourInstance = new RateLimiter();
-    private Map<RateLimiterKey, Integer> noOfCalls;
+    private Map<RateLimiterKey, AtomicInteger> noOfCalls;
     private int throttleLimit;
     private Thread keyRemoverThread;
 
@@ -50,15 +50,10 @@ public class RateLimiter {
     }
 
     private int incrementAndGetNoOfCalls(RateLimiterKey rateLimiterKey) {
-        Integer calls = 0;
-        synchronized (noOfCalls) {//TODO: Ask Vinit how to make this better so that we dont have performance implecations due to holding lock on whole of noOfCalls
-            if (noOfCalls.containsKey(rateLimiterKey)) {
-                calls = noOfCalls.get(rateLimiterKey);
-            }
+        noOfCalls.putIfAbsent(rateLimiterKey, new AtomicInteger(0));
+        Integer calls = noOfCalls.get(rateLimiterKey).incrementAndGet();
 
-            noOfCalls.put(rateLimiterKey, calls + 1);
-            return calls + 1;
-        }
+        return calls;
     }
 }
 

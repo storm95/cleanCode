@@ -16,7 +16,7 @@ public class Queue implements QueueInterface {
     Queue(String name, Integer maxNoOfMessagesBeforeTtl) {
         this.name = name;
         consumers = new Vector<>();//Used Vector instead of ArrayList as Vector is Thread Safe
-        messages = new LinkedList<>();//Used Vector instead of ArrayList as Vector is Thread Safe
+        messages = new LinkedList<>();
         messagesExpiryPriority = new PriorityBlockingQueue<>(maxNoOfMessagesBeforeTtl, Comparator.comparing((Message message) -> message.ttl));
     }
 

@@ -3,6 +3,7 @@ package com.ankit.InMemoryQueue.library;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 
 public class QueueProvider {
     private static QueueProvider queueProvider = new QueueProvider();
@@ -16,7 +17,7 @@ public class QueueProvider {
 
     private QueueProvider() {
         queueMap = new HashMap<>();
-        queues = new ArrayList<>();
+        queues = new Vector<>();//Used Vector instead of ArrayList as Vector is Thread Safe
         expiredMessageRemover = new Thread(getProcessRemovingExpiredMessages());
     }
 

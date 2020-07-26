@@ -7,6 +7,7 @@ public class Consumer implements ConsumerInterface {
 
     Consumer(String name, String queueName) {
         this.name = name;
+        offset = 0;
         queue = QueueProvider.getInstance().getQueue(queueName);
     }
 

@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class Crawler {
 
     public volatile String x;
-    private volatile List<String> visitedUrls;
+    private final List<String> visitedUrls;
     private final ExecutorService executorService;
 
     Crawler(int noOfThreads) {
@@ -26,13 +26,18 @@ public class Crawler {
 
         for (String url : urls) {
             executorService.submit(() -> {
-                    if (!visitedUrls.contains(url)) {
-                        visitedUrls.add(url);
-                        List<String> urlsOnThisPage = getUrlsOnPage(url);
-                        crawlUrls(urlsOnThisPage);
-                    }
+                synchronized (visitedUrls) {
+                    if (visitedUrls.contains(url))
+                        return;
+
+                    visitedUrls.add(url);
                 }
-            );
+
+                System.out.println(url);
+                List<String> urlsOnThisPage = getUrlsOnPage(url);
+                crawlUrls(urlsOnThisPage);
+
+            });
         }
     }
 

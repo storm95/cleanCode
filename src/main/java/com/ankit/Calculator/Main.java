@@ -31,5 +31,3 @@ public class Main {
     }
 }
 
-//c = divide(a, b)
-//print(add(a, c))

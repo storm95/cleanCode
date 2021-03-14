@@ -1,21 +1,22 @@
 package com.ankit.ankushPlacements.parkingLot;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 public class ParkingLot {
     Map<Integer, SpotAssignment> assignedSpotMapping;
     Map<Integer, Spot> spotNoToSpotMapping;
-    Map<Integer, Vector<SpotAssignment>> historicalAssignedSpotMapping;
+    Map<Integer, List<SpotAssignment>> historicalAssignedSpotMapping;
 
     ParkingLot() {
         assignedSpotMapping = new HashMap<>();
         spotNoToSpotMapping = new HashMap<>();
+        historicalAssignedSpotMapping = new HashMap<>();
     }
 
     void addSpot(Spot spot) {
+
         spotNoToSpotMapping.put(spot.no, spot);
+        historicalAssignedSpotMapping.put(spot.no, new ArrayList<>());
     }
 
     Spot getSpot(Vehicle vehicle) {

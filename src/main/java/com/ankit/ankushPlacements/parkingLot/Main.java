@@ -4,10 +4,10 @@ public class Main {
     public static void main(String args[]) {
         ParkingLot parkingLot = new ParkingLot();
 
-        Spot spot1 = new Spot(1, VehicleType.TWO_WHEELER, 10000000000000.0);
-        Spot spot2 = new Spot(2, VehicleType.THREE_WHEELER, 20.0);
-        Spot spot3 = new Spot(3, VehicleType.FOUR_WHEELER, 40.0);
-        Spot spot4 = new Spot(4, VehicleType.TWO_WHEELER, 10.0);
+        Spot spot1 = new TwoWheelerSpot(1, 10000000000000.0);
+        Spot spot2 = new ThreeWheelerSpot(2, 20.0);
+        Spot spot3 = new FourWheelerSpot(3,  40.0);
+        Spot spot4 = new TwoWheelerSpot(4, 10.0);
 
         parkingLot.addSpot(spot1);
         parkingLot.addSpot(spot2);

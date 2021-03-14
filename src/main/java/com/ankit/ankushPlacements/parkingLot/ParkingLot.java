@@ -34,11 +34,13 @@ public class ParkingLot {
     }
 
     Double getPrice(int spotNo) {
+
+
         long endTime = System.currentTimeMillis();
         SpotAssignment spotAssignment = assignedSpotMapping.get(spotNo);
         long startTime = spotAssignment.startTime;
-        double durationInHr = (endTime - startTime)/(1000*60*60.0);
-        double price = durationInHr * spotNoToSpotMapping.get(spotNo).perHrPrice;
+        long durationInHr = (endTime - startTime)/(1000*60*60);
+        double  price=spotNoToSpotMapping.get(spotNo).getPrice(durationInHr);
 
         return price;
     }

@@ -6,7 +6,7 @@ public class Producer {
 
     Producer(String name, String queueName) {
         this.name = name;
-        queue = QueueProvider.getInstance().getQueue(queueName);
+        queue = QueueManager.getInstance().getQueue(queueName);
     }
 
     public void pushMessage(Message message) {

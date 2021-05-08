@@ -1,7 +1,7 @@
 package com.ankit.cleanCodeTesting;
 
-import com.ankit.cleanCode.Stack;
-import com.ankit.cleanCode.StackFactory;
+import com.ankit.stack.Stack;
+import com.ankit.stack.StackFactory;
 import org.junit.Assert;
 import org.junit.Test;
 

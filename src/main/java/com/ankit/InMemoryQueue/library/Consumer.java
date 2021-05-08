@@ -1,14 +1,16 @@
 package com.ankit.InMemoryQueue.library;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Consumer implements ConsumerInterface {
     String name;
     Queue queue;
-    private Integer offset;
+    private AtomicInteger offset;
 
     Consumer(String name, String queueName) {
         this.name = name;
-        offset = 0;
-        queue = QueueProvider.getInstance().getQueue(queueName);
+        offset = new AtomicInteger(0);
+        queue = QueueManager.getInstance().getQueue(queueName);
     }
 
     public void update(Object message) {
@@ -22,15 +24,15 @@ public class Consumer implements ConsumerInterface {
         System.out.printf("message: %s ,name: %s\n", message, this.name);
     }
 
-    public void setOffset(Integer offset) {
-        this.offset = offset;
+    public void setOffset(int offset) {
+        this.offset.getAndSet(offset);
     }
 
     public void incrementOffset() {
-        this.offset++;
+        this.offset.incrementAndGet();
     }
 
     public Integer getOffset() {
-        return offset;
+        return offset.get();
     }
 }

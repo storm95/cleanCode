@@ -10,13 +10,13 @@ import java.util.concurrent.PriorityBlockingQueue;
 public class Queue implements QueueInterface {
     String name;
     List<ConsumerInterface> consumers;
-    private List<Message> messages;
+    private final List<Message> messages;
     BlockingQueue<Message> messagesExpiryPriority;
 
     Queue(String name, Integer maxNoOfMessagesBeforeTtl) {
         this.name = name;
         consumers = new Vector<>();//Used Vector instead of ArrayList as Vector is Thread Safe
-        messages = new LinkedList<>();
+        messages = new Vector<>();
         messagesExpiryPriority = new PriorityBlockingQueue<>(maxNoOfMessagesBeforeTtl, Comparator.comparing((Message message) -> message.ttl));
     }
 

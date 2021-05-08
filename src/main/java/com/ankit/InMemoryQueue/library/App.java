@@ -1,11 +1,11 @@
 package com.ankit.InMemoryQueue.library;
 
 public class App {
-    static QueueProvider queueManager;
+    static QueueManager queueManager;
 
-    public static void init() {
-        queueManager = QueueProvider.getInstance();
-        queueManager.init();
+    public static void init(int maxNoOfQueues) {
+        queueManager = QueueManager.getInstance();
+        queueManager.init(maxNoOfQueues);
     }
 
     public static void shutdown() {

@@ -1,4 +1,4 @@
-package com.ankit.cleanCode;
+package com.ankit.stack;
 
 public class ZeroSizeStack implements Stack {
     public ZeroSizeStack(int size) {

@@ -30,10 +30,10 @@ public class RateLimiterTest {
     private Runnable getRunnable(int i) {
         return () -> {
             String msg = "Executable Running, i = "+Integer.toString(i);
-            Executable executable = () -> System.out.println(msg);
+            Call call = () -> System.out.println(msg);
 
             try {
-                rateLimiter.rateLimiterCall("ip1", executable);
+                rateLimiter.rateLimiterCall("ip1", call);
             } catch (Exception e) {
                 System.out.println(e);
             }

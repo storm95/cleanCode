@@ -3,17 +3,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta http-equiv="x-ua-compatible" content="IE=edge"/>
-<title>Test results - Class com.ankit.ConfigManagementSystemV2.ConfigManagerTest</title>
+<title>Test results - Class com.ankit.RateLimiter.RateLimiterTest</title>
 <link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
 <link href="../css/style.css" rel="stylesheet" type="text/css"/>
 <script src="../js/report.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="content">
-<h1>Class com.ankit.ConfigManagementSystemV2.ConfigManagerTest</h1>
+<h1>Class com.ankit.RateLimiter.RateLimiterTest</h1>
 <div class="breadcrumbs">
 <a href="../index.html">all</a> &gt; 
-<a href="../packages/com.ankit.ConfigManagementSystemV2.html">com.ankit.ConfigManagementSystemV2</a> &gt; ConfigManagerTest</div>
+<a href="../packages/com.ankit.RateLimiter.html">com.ankit.RateLimiter</a> &gt; RateLimiterTest</div>
 <div id="summary">
 <table>
 <tr>
@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">0</div>
+<div class="counter">1</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">-</div>
+<div class="counter">0.019s</div>
 <p>duration</p>
 </div>
 </td>
@@ -51,7 +51,7 @@
 </td>
 <td>
 <div class="infoBox success" id="successRate">
-<div class="percent">-</div>
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -77,14 +77,38 @@
 <th>Result</th>
 </tr>
 </thead>
+<tr>
+<td class="success">testRateLimiterCall</td>
+<td>0.019s</td>
+<td class="success">passed</td>
+</tr>
 </table>
 </div>
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>Calls: 20, ip: ip1, second: 1620545452
+<pre>Calls: 2, ip: ip1, second: 1620545452
+Executable Running, i = 3
+Calls: 17, ip: ip1, second: 1620545452
+Calls: 16, ip: ip1, second: 1620545452
 com.ankit.RateLimiter.RateLimiterException
-Executable Running, i = 11
+com.ankit.RateLimiter.RateLimiterException
+Calls: 15, ip: ip1, second: 1620545452
+com.ankit.RateLimiter.RateLimiterException
+Calls: 14, ip: ip1, second: 1620545452
+com.ankit.RateLimiter.RateLimiterException
+Calls: 18, ip: ip1, second: 1620545452
+com.ankit.RateLimiter.RateLimiterException
+Calls: 13, ip: ip1, second: 1620545452
+com.ankit.RateLimiter.RateLimiterException
+Calls: 19, ip: ip1, second: 1620545452
+com.ankit.RateLimiter.RateLimiterException
+Calls: 12, ip: ip1, second: 1620545452
+com.ankit.RateLimiter.RateLimiterException
+Calls: 1, ip: ip1, second: 1620545452
+Executable Running, i = 0
+Calls: 11, ip: ip1, second: 1620545452
+com.ankit.RateLimiter.RateLimiterException
 </pre>
 </span>
 </div>

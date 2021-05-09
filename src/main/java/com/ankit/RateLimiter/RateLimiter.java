@@ -39,7 +39,7 @@ public class RateLimiter {
         };
     }
 
-    public void rateLimiterCall(String ip, Executable executable) throws RateLimiterException {
+    public void rateLimiterCall(String ip, Call call) throws RateLimiterException {
         RateLimiterKey rateLimiterKey = new RateLimiterKey(ip, Instant.now().getEpochSecond());;
         Integer calls = incrementAndGetNoOfCalls(rateLimiterKey);
         System.out.println("Calls: "+calls+", ip: "+rateLimiterKey.ip+", second: "+rateLimiterKey.second);
@@ -48,7 +48,7 @@ public class RateLimiter {
         }
 
         try {
-            executable.run();
+            call.run();
         } catch (Exception e) {
             System.out.println("Exception occured while running your Executable: "+e);
         }

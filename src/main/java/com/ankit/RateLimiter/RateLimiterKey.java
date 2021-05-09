@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class RateLimiterKey {
     String ip;
-    Long second;
+    long second;
 
-    RateLimiterKey(String ip, Long second) {
+    RateLimiterKey(String ip, long second) {
         this.ip = ip;
         this.second = second;
     }
@@ -23,6 +23,6 @@ public class RateLimiterKey {
         if (obj.getClass() != this.getClass()) return false;
 
         RateLimiterKey rateLimiterKey = (RateLimiterKey) obj;
-        return rateLimiterKey.ip.equals(this.ip) && rateLimiterKey.second.equals(this.second);
+        return rateLimiterKey.ip.equals(this.ip) && (rateLimiterKey.second == this.second);
     }
 }

@@ -1,5 +1,6 @@
 package com.ankit.RateLimiter;
 
+import java.time.Instant;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -26,16 +27,20 @@ public class RateLimiter {
         //Add cleaner task
     }
 
+    public void shutdown() {
+        keyRemoverThread.interrupt();
+    }
+
     private Runnable getKeyRemoverRunnable() {
         return () -> {
-          while(true) {
-              noOfCalls.keySet().removeIf(key -> key.second < System.currentTimeMillis()/1000);
+          while(!keyRemoverThread.isInterrupted()) {
+              noOfCalls.keySet().removeIf(key -> key.second < Instant.now().getEpochSecond());
           }
         };
     }
 
-    public void rateLimiterCall(String ip, Executable executable) throws Exception {
-        RateLimiterKey rateLimiterKey = new RateLimiterKey(ip, System.currentTimeMillis()/1000);
+    public void rateLimiterCall(String ip, Executable executable) throws RateLimiterException {
+        RateLimiterKey rateLimiterKey = new RateLimiterKey(ip, Instant.now().getEpochSecond());;
         Integer calls = incrementAndGetNoOfCalls(rateLimiterKey);
         System.out.println("Calls: "+calls+", ip: "+rateLimiterKey.ip+", second: "+rateLimiterKey.second);
         if (calls > throttleLimit) {

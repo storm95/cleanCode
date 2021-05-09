@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.ankit.competitiveCoding.petrolPump.PetrolPumpTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-05-09T14:16:49" hostname="ankitkumar-C02VM43XHTD7" time="0.009">
+  <properties/>
+  <testcase name="computeTest" classname="com.ankit.competitiveCoding.petrolPump.PetrolPumpTest" time="0.009"/>
+  <system-out><![CDATA[2
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
